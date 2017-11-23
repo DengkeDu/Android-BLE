@@ -29,6 +29,7 @@
 
         <Button
             android:id="@+id/forward"
+            android:onClick="onClickForward"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -51,6 +52,7 @@
 
         <Button
             android:id="@+id/left"
+            android:onClick="onClickLeft"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -59,6 +61,7 @@
 
         <Button
             android:id="@+id/stop"
+            android:onClick="onClickStop"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -67,6 +70,7 @@
 
         <Button
             android:id="@+id/right"
+            android:onClick="onClickRight"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -89,6 +93,7 @@
 
         <Button
             android:id="@+id/back"
+            android:onClick="onClickBack"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"

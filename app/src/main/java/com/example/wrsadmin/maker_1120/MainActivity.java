@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             BluetoothDevice bt = result.getDevice();
             if (bt!=null) {
                 if (bt.getName()!=null) {
-                    Log.d("TAG",bt.getName());
+
                     if (bt.getName().contains("LEDCB")) {
                         if(mBluetoothDevice==null){
                             mBluetoothDevice = bt;
@@ -62,85 +62,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        }
-    };
-
-    BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
-        @Override
-        public void onPhyUpdate(BluetoothGatt gatt, int txPhy, int rxPhy, int status) {
-            super.onPhyUpdate(gatt, txPhy, rxPhy, status);
-        }
-
-        @Override
-        public void onPhyRead(BluetoothGatt gatt, int txPhy, int rxPhy, int status) {
-            super.onPhyRead(gatt, txPhy, rxPhy, status);
-        }
-
-        @Override
-        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-            super.onConnectionStateChange(gatt, status, newState);
-            if (newState==STATE_CONNECTED){
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //this.getActionBar().setTitle("Connected!");
-                        mTextView.append("Connected\n");
-                    }
-                });
-
-            }else {
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mTextView.append("Disconnected\n");
-                    }
-                });
-            }
-        }
-
-        @Override
-        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-            super.onServicesDiscovered(gatt, status);
-        }
-
-        @Override
-        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            super.onCharacteristicRead(gatt, characteristic, status);
-        }
-
-        @Override
-        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            super.onCharacteristicWrite(gatt, characteristic, status);
-        }
-
-        @Override
-        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            super.onCharacteristicChanged(gatt, characteristic);
-        }
-
-        @Override
-        public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
-            super.onDescriptorRead(gatt, descriptor, status);
-        }
-
-        @Override
-        public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
-            super.onDescriptorWrite(gatt, descriptor, status);
-        }
-
-        @Override
-        public void onReliableWriteCompleted(BluetoothGatt gatt, int status) {
-            super.onReliableWriteCompleted(gatt, status);
-        }
-
-        @Override
-        public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
-            super.onReadRemoteRssi(gatt, rssi, status);
-        }
-
-        @Override
-        public void onMtuChanged(BluetoothGatt gatt, int mtu, int status) {
-            super.onMtuChanged(gatt, mtu, status);
         }
     };
 
@@ -179,9 +100,11 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             };
         }
-        mTextView.setText("Disconnected!");
+
         if(mBluetoothDevice!=null){
             mTextView.setText("In a connection!");
+        }else {
+            mTextView.setText("Waiting for arudino 101 to connectting ...");
         }
         mBluetoothLeScanner = mBluetoothAdapter.getBluetoothLeScanner();
         if (mBluetoothLeScanner!=null) {
